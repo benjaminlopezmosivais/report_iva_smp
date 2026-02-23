@@ -1,0 +1,34 @@
+# Archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.swp
+*.swo
+
+# Archivos de configuración locales
+.env
+*.local
+
+# Archivos de bases de datos SQLite
+*.sqlite3
+
+# Archivos de Odoo
+*.db
+*.dat
+*.dump
+
+# Directorios de compilación
+build/
+dist/
+*.egg-info/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
