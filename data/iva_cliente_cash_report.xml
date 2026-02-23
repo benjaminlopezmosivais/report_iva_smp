@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <!-- REPORTE -->
+    <record id="report_iva_cliente_cash" model="account.report">
+        <field name="name">IVA por Cliente (Flujo Fiscal)</field>
+        <field name="filter_date_range" eval="True"/>
+        <field name="filter_journals" eval="True"/>
+        <field name="filter_unfold_all" eval="True"/>
+        <field name="custom_handler_model_id" ref="iva_cliente_cash_report.model_report_iva_cliente_cash_handler"/>
+    </record>
+    
+    <!-- Datos generales -->
+    <record id="col_partner" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Partner</field><field name="expression_label">partner</field><field name="figure_type">string</field></record>
+    <record id="col_numfac" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Num Fac</field><field name="expression_label">num_fac</field><field name="figure_type">string</field></record>
+    <record id="col_fechafac" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Fecha Fac</field><field name="expression_label">fecha_fac</field><field name="figure_type">date</field></record>
+    <record id="col_fechapago" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Fecha Pago</field><field name="expression_label">fecha_pago</field><field name="figure_type">date</field></record>
+
+    <!-- IVA trasladado -->
+    <record id="col_tbase16" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Base 16% Trasladado</field><field name="expression_label">t_base_16</field><field name="figure_type">float</field></record>
+    <record id="col_tbase0" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Base 0% Trasladado</field><field name="expression_label">t_base_0</field><field name="figure_type">float</field></record>
+    <record id="col_tiva16" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">IVA 16% Trasladado</field><field name="expression_label">t_iva_16</field><field name="figure_type">float</field></record>
+    <record id="col_tiva0" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">IVA 0% Trasladado</field><field name="expression_label">t_iva_0</field><field name="figure_type">float</field></record>
+
+    <!-- IVA acreditable -->
+    <record id="col_ab16" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Base 16% Acreditable</field><field name="expression_label">a_base_16</field><field name="figure_type">float</field></record>
+    <record id="col_ab8" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Base 8% Acreditable</field><field name="expression_label">a_base_8</field><field name="figure_type">float</field></record>
+    <record id="col_ab0" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Base 0% Acreditable</field><field name="expression_label">a_base_0</field><field name="figure_type">float</field></record>
+    <record id="col_abexenta" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Base Exenta</field><field name="expression_label">a_base_exenta</field><field name="figure_type">float</field></record>
+    <record id="col_ai16" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">IVA 16% Acreditable</field><field name="expression_label">a_iva_16</field><field name="figure_type">float</field></record>
+    <record id="col_ai8" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">IVA 8% Acreditable</field><field name="expression_label">a_iva_8</field><field name="figure_type">float</field></record>
+    <record id="col_ai0" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">IVA 0% Acreditable</field><field name="expression_label">a_iva_0</field><field name="figure_type">float</field></record>
+    <record id="col_aiexento" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">IVA Exento</field><field name="expression_label">a_iva_exento</field><field name="figure_type">float</field></record>
+    <record id="col_ai16imp" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">IVA 16% Importación</field><field name="expression_label">a_iva_16_imp</field><field name="figure_type">float</field></record>
+    <record id="col_andeducible" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">No Deducible</field><field name="expression_label">a_no_deducible</field><field name="figure_type">float</field></record>
+    <record id="col_anoobjeto" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">No Objeto</field><field name="expression_label">a_no_objeto</field><field name="figure_type">float</field></record>
+
+    <!-- Retenciones -->
+    <record id="col_riva_fletes4" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Ret IVA Fletes 4%</field><field name="expression_label">riva_fletes_4</field><field name="figure_type">float</field></record>
+    <record id="col_riva_servprof1067" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Ret IVA Serv Prof 10.67%</field><field name="expression_label">riva_servprof_1067</field><field name="figure_type">float</field></record>
+    <record id="col_riva_arr1067" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Ret IVA Arr 10.67%</field><field name="expression_label">riva_arr_1067</field><field name="figure_type">float</field></record>
+    <record id="col_risr_servprof10" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Ret ISR Serv Prof 10%</field><field name="expression_label">risr_servprof_10</field><field name="figure_type">float</field></record>
+    <record id="col_risr_arr10" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Ret ISR Arr 10%</field><field name="expression_label">risr_arr_10</field><field name="figure_type">float</field></record>
+    <record id="col_risr_resico125" model="account.report.column"><field name="report_id" ref="report_iva_cliente_cash"/><field name="name">Ret ISR Resico 1.25%</field><field name="expression_label">risr_resico_125</field><field name="figure_type">float</field></record>
+
+    <!-- Precio sin iva -->
+    <record id="col_precio_sin_iva" model="account.report.column">
+      <field name="report_id" ref="report_iva_cliente_cash"/>
+      <field name="name">Precio sin iva</field>
+      <field name="expression_label">Precio_sin_iva</field>
+      <field name="figure_type">float</field>
+    </record>
+
+    <!-- Iva -->
+    <record id="col_iva" model="account.report.column">
+      <field name="report_id" ref="report_iva_cliente_cash"/>
+      <field name="name">IVA</field>
+      <field name="expression_label">iva</field>
+      <field name="figure_type">float</field>
+    </record>
+
+    <!-- Total Neto  -->
+    <record id="col_total_neto" model="account.report.column">
+      <field name="report_id" ref="report_iva_cliente_cash"/>
+      <field name="name">Total Neto</field>
+      <field name="expression_label">total_neto</field>
+      <field name="figure_type">float</field>
+    </record>
+
+
+    <!-- Acción -->
+    <record id="action_report_iva_cliente_cash_window" model="ir.actions.act_window">
+      <field name="name">IVA por Cliente (Flujo Fiscal)</field>
+      <field name="res_model">account.report</field>
+      <field name="view_mode">form</field>
+      <field name="res_id" ref="report_iva_cliente_cash"/>
+    </record>
+
+    <!-- Menú -->
+    <menuitem id="menu_report_iva_cliente_cash"
+              name="IVA por Cliente (Flujo Fiscal)"
+              parent="account.menu_finance_reports"
+              action="action_report_iva_cliente_cash_window"
+              groups="account.group_account_user"/>
+
+  </data>
+</odoo>
